@@ -53,7 +53,7 @@ public class MemoryBoard : ModelBaseClass
             cardIds.Add(i);
         }
 
-        // If numTiles is odd, add one more unique cardId
+        // If numTiles is odd, add one more cardId
         if (numTiles % 2 != 0)
         {
             cardIds.Add(numTiles / 2);

@@ -6,10 +6,20 @@ public class Tile : ModelBaseClass
 {
     public int Row { get; private set; }
     public int Column { get; private set; }
-    public int MemoryCardId { get; set; }
+    public int MemoryCardId 
+    {
+        get { return MemoryCardId; }
+        set 
+        {
+            MemoryCardId = value;
+            OnPropertyChanged();
+
+        }
+    }
+
     public MemoryBoard Board { get; private set; }
 
-    public Tile(int row, int column, MemoryBoard board)
+    public  Tile(int row, int column, MemoryBoard board)
     {
         Row = row;
         Column = column;
