@@ -39,42 +39,38 @@ public class MemoryBoard : ModelBaseClass
         }
 
         AssignMemoryCardIds();
+
+
+      
     }
 
     public void AssignMemoryCardIds()
     {
-        int numTiles = Tiles.Count;
-        List<int> cardIds = new List<int>();
-
-        // Generate cardIds from 0 to numTiles/2-1
-        for (int i = 0; i < numTiles / 2; i++)
+        List<int> ids = new List<int>();
+        for (int i = 0; i < Rows * Columns / 2; i++)
         {
-            cardIds.Add(i);
-            cardIds.Add(i);
+            ids.Add(i);
+            ids.Add(i);
         }
-
-        // If numTiles is odd, add one more cardId
-        if (numTiles % 2 != 0)
+        if (Rows * Columns % 2 == 1)
         {
-            cardIds.Add(numTiles / 2);
+            ids.Add(ids.Count);
         }
-
-        // Shuffle the cardIds randomly
         System.Random rng = new System.Random();
-        int n = cardIds.Count;
+        int n = ids.Count;
         while (n > 1)
         {
             n--;
             int k = rng.Next(n + 1);
-            int temp = cardIds[k];
-            cardIds[k] = cardIds[n];
-            cardIds[n] = temp;
+            int value = ids[k];
+            ids[k] = ids[n];
+            ids[n] = value;
         }
-
-        // Assign the shuffled cardIds to the tiles
-        for (int i = 0; i < numTiles; i++)
+        int index = 0;
+        foreach (Tile tile in Tiles)
         {
-            Tiles[i].MemoryCardId = cardIds[i];
+            tile.MemoryCardId = ids[index];
+            index++;
         }
     }
 
