@@ -1,3 +1,4 @@
+using Memory.Models.States;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace Memory.Models
 {
-    public class MemoryBoard : ModelBaseClass
+    public class MemoryBoard : ModelBaseClass 
     {
         public int Rows;
         public int Columns;
@@ -28,6 +29,8 @@ namespace Memory.Models
             }
         }
 
+        public IBoardState State { get;  set; }
+
         public MemoryBoard(int rows, int columns)
         {
             Rows = rows;
@@ -42,11 +45,10 @@ namespace Memory.Models
                     Tiles.Add(new Tile(row, col, this));
                 }
             }
-
+            
             AssignMemoryCardIds();
 
-
-
+            State = new BoardNoPreviewState(this);
         }
 
         public void AssignMemoryCardIds()

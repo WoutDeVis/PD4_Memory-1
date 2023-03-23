@@ -1,3 +1,4 @@
+using Memory.Models.States;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,21 +26,24 @@ namespace Memory.Models
 
         public MemoryBoard Board { get; private set; }
 
+        private ITileState _state;
+        public ITileState State
+        {
+            get { return _state; }
+            set
+            {
+                _state = value;
+                _state.Tile = this;
+                OnPropertyChanged();
+            }
+        }
+
         public Tile(int row, int column, MemoryBoard board)
         {
             Row = row;
             Column = column;
             Board = board;
-        }
-
-        public void Flip()
-        {
-            // Add code here to flip the tile over and show the MemoryCardId
-        }
-
-        public void Unflip()
-        {
-            // Add code here to unflip the tile and hide the MemoryCardId
+            State = new TileHiddenState(this);
         }
 
         public override string ToString()
@@ -48,4 +52,16 @@ namespace Memory.Models
         }
     }
 }
+
+        //public void Flip()
+        //{
+        //    // Add code here to flip the tile over and show the MemoryCardId
+        //}
+
+        //public void Unflip()
+        //{
+        //    // Add code here to unflip the tile and hide the MemoryCardId
+        //}
+
+   
 
