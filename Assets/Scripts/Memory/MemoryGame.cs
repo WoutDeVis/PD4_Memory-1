@@ -15,12 +15,9 @@ namespace Memory
         private GameObject _tilePrefab;
         [SerializeField]
         private GameObject _memoryBoard;
+        [SerializeField]
+        private Material[] _materials;
 
-
-
-
-
-        private float _currentTime;
 
 
 
@@ -30,16 +27,11 @@ namespace Memory
         {
             _board = new MemoryBoard(3, 3);
 
-            _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab);
+            _memoryBoard.GetComponent<MemoryBoardView>().SetUpMemoryBoardView(_board, _tilePrefab,_materials);
 
-            //Tile tile = _board.Tiles[Random.Range(0, _board.Tiles.Count)];
-            //tile.PropertyChanged += Tile_PropertyChanged;
         }
 
-        //private void Tile_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    Debug.Log($"Tile property '{e.PropertyName}' changed: {sender.ToString()}");
-        //}
+    
 
 
 

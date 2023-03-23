@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de4dec8d122d6e489f8d56639e7b7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilePrefab: {fileID: 7520949809132976232, guid: 46f391acc0da72847bc63f0675bbd091,
+  _tilePrefab: {fileID: 2570227270121325920, guid: 3f2189010b6823741b8529bb8b682729,
     type: 3}
   _memoryBoard: {fileID: 737482005}
 --- !u!4 &2003425559

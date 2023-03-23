@@ -1,15 +1,19 @@
-    using System.Collections;
+using Memory.Models;
+using Memory.Views;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour, IPointerDownHandler
+public class Card : MonoBehaviour
 {
     private Animator _animator;
-
+    private TileView _tileView;
 
     private void Start()
     {
+        _tileView = GetComponentInParent<TileView>();
+        
         _animator = GetComponent<Animator>();
         AddEvents();
     }
@@ -20,7 +24,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
         for(int i = 0;i< _animator.runtimeAnimatorController.animationClips.Length; i++)
         {
             AnimationClip clip = _animator.runtimeAnimatorController.animationClips[i];
-            Debug.Log(clip.name);
+            
 
             AnimationEvent animationStartEvent = new AnimationEvent();
             animationStartEvent.time = 0;
@@ -39,19 +43,19 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     public void AnimationStartHandler(string name)
     {
-        Debug.Log($"{name} animation start.");
+       
     }
 
     public void AnimationCompletedHandler(string name)
     {
-        Debug.Log($"{name} animation end.");
+        _tileView.Model.Board.State.TileAnimationEnded(_tileView.Model);
     }
     #endregion
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        _animator.Play("Shown");
-    }
+   public void Play(string clipName)
+   {
+        _animator.Play(clipName);
+   }
 
   
 }

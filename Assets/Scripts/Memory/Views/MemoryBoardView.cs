@@ -12,7 +12,7 @@ namespace Memory.Views
 
 
 
-        public void SetUpMemoryBoardView(MemoryBoard model, GameObject tilePrefab)
+        public void SetUpMemoryBoardView(MemoryBoard model, GameObject tilePrefab, Material[] materials)
         {
             Model = model;
 
@@ -22,7 +22,11 @@ namespace Memory.Views
                 Vector3 position = new Vector3(tile.Column, 0, tile.Row);
 
                 // Instantiate the tilePrefab using the executing MemoryBoardView's gameObject as parent
-                GameObject tileObject = Instantiate(tilePrefab, position, Quaternion.identity, this.gameObject.transform);
+                GameObject tileObject = Instantiate(tilePrefab, position, tilePrefab.transform.rotation, this.gameObject.transform);
+
+                //Debug.Log(tile.MemoryCardId);
+                tileObject.transform.GetChild(0).GetChild(1).GetComponent<Renderer>().material = materials[tile.MemoryCardId];
+
 
                 // Get the TileView component from the instantiated GameObject
                 TileView tileView = tileObject.GetComponent<TileView>();

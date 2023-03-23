@@ -20,7 +20,9 @@ namespace Memory.Models
             {
                 if (PreviewingTiles.Count == 2 && PreviewingTiles[0].MemoryCardId == PreviewingTiles[1].MemoryCardId)
                 {
+                   
                     return true;
+                    
                 }
                 else
                 {
@@ -54,14 +56,14 @@ namespace Memory.Models
         public void AssignMemoryCardIds()
         {
             List<int> ids = new List<int>();
-            for (int i = 0; i < Rows * Columns / 2; i++)
+            for (int i = 0; i < Tiles.Count / 2; i++)
             {
                 ids.Add(i);
                 ids.Add(i);
             }
-            if (Rows * Columns % 2 == 1)
+            if (Tiles.Count % 2 == 1)
             {
-                ids.Add(ids.Count);
+                ids.Add((int)Mathf.Floor(Tiles.Count/2));
             }
             System.Random rng = new System.Random();
             int n = ids.Count;
@@ -78,6 +80,8 @@ namespace Memory.Models
             {
                 tile.MemoryCardId = ids[index];
                 index++;
+
+                Debug.Log(tile.MemoryCardId);
             }
         }
 
@@ -85,5 +89,11 @@ namespace Memory.Models
         {
             return $"MemoryBoard({Rows},{Columns})";
         }
+
+
+
+
     }
+
+    
 }

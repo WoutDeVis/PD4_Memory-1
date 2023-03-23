@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4586062439123284955, guid: cfbe331aa28b0ff4e9bfc876bd6c38af,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c52ba1323dcbac40856be4079933ec2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfbe331aa28b0ff4e9bfc876bd6c38af, type: 3}
 --- !u!1 &4035669411074483901 stripped
@@ -178,7 +183,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7520949808303434019}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &7520949808343094482
+--- !u!95 &9072914226480056794
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -198,7 +203,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7520949808343094483
+--- !u!114 &6598854226218340683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
