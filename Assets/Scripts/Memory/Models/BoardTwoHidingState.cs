@@ -24,6 +24,7 @@ namespace Memory.Models
 
             if(Board.PreviewingTiles.Count == 0)
             {
+                Board.ToggleActivePlayer();
                 Board.State = new BoardNoPreviewState(Board);
             }
 

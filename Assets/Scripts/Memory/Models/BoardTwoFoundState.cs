@@ -28,11 +28,14 @@ namespace Memory.Models
                 if (Board.Tiles.Where(t => t.State.State == TileStates.Hidden).Count() < 2)
 
                 {
+                    Board.Player1.IsActive = false;
+                    Board.Player2.IsActive = false;
                     Board.State = new BoardFinishedState(Board);
                     
                 }
                 else
                 {
+                    Board.ToggleActivePlayer();
                     Board.State = new BoardNoPreviewState(Board);
                 }
             }

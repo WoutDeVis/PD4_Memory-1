@@ -25,6 +25,13 @@ namespace Memory.Models
 
             if (tile.Board.IsCombinationFound)
             {
+
+                if (Board.Player1.IsActive)
+                    Board.Player1.Score++;
+                else
+                    Board.Player2.Score++;
+
+
                 tile.Board.State = new BoardTwoFoundState(tile.Board);
                 tile.State = new TileFoundState(tile);
                 tile.Board.PreviewingTiles[0].State = new TileFoundState(tile.Board.PreviewingTiles[0]);

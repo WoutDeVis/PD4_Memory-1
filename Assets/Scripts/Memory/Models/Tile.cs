@@ -53,15 +53,6 @@ namespace Memory.Models
     }
 }
 
-        //public void Flip()
-        //{
-        //    // Add code here to flip the tile over and show the MemoryCardId
-        //}
-
-        //public void Unflip()
-        //{
-        //    // Add code here to unflip the tile and hide the MemoryCardId
-        //}
 
    
 

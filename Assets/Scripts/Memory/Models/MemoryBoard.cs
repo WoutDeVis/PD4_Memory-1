@@ -14,6 +14,10 @@ namespace Memory.Models
         public int Columns;
         public List<Tile> Tiles = new();
         public List<Tile> PreviewingTiles = new();
+
+        public Player Player1;
+        public Player Player2;
+
         public bool IsCombinationFound
         {
             get
@@ -35,10 +39,13 @@ namespace Memory.Models
 
         public MemoryBoard(int rows, int columns)
         {
+
             Rows = rows;
             Columns = columns;
             Tiles = new List<Tile>();
             PreviewingTiles = new List<Tile>();
+            
+
 
             for (int row = 0; row < Rows; row++)
             {
@@ -51,6 +58,12 @@ namespace Memory.Models
             AssignMemoryCardIds();
 
             State = new BoardNoPreviewState(this);
+        }
+
+        public void ToggleActivePlayer()
+        {
+            Player1.IsActive = !Player1.IsActive;
+            Player2.IsActive = !Player2.IsActive;
         }
 
         public void AssignMemoryCardIds()
