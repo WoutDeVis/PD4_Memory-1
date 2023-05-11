@@ -73,6 +73,25 @@ namespace Memory.Views
             
             if (e.PropertyName.Equals(nameof(Model.State)))
                 StartAnimation();
+            else if (e.PropertyName.Equals(nameof(Model.MemoryCardId)))
+                LoadFront();
+
+        }
+
+        private void LoadFront()
+        {
+            ImageRepository.Instance.GetProcessTexture(Model.MemoryCardId, LoadFront);
+        }
+        private void LoadFront(Texture2D texture)
+        {
+            //gameObject.transform.Find("Front").GetComponent<Renderer>().material.mainTexture = texture;
+
+            //Transform transform = gameObject.transform.Find("Front");
+            //Debug.Log(transform.name + "  " + transform.position);
+
+            //transform.GetComponent<Renderer>().material.mainTexture = texture;
+
+            gameObject.transform.GetChild(0).GetChild(1).GetComponent<Renderer>().material.mainTexture = texture;
 
         }
 

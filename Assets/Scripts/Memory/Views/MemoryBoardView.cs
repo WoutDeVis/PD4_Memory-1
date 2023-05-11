@@ -55,7 +55,7 @@ namespace Memory.Views
                 GameObject tileObject = Instantiate(tilePrefab, position, tilePrefab.transform.rotation, this.gameObject.transform);
 
                
-                tileObject.transform.GetChild(0).GetChild(1).GetComponent<Renderer>().material = materials[tile.MemoryCardId];
+                //tileObject.transform.GetChild(0).GetChild(1).GetComponent<Renderer>().material = materials[tile.MemoryCardId];
 
 
                 

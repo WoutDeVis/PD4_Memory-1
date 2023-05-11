@@ -35,6 +35,7 @@ namespace Memory.Models
                 }
                 else
                 {
+                    
                     Board.ToggleActivePlayer();
                     Board.State = new BoardNoPreviewState(Board);
                 }
