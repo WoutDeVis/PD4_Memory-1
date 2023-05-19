@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 1347137464}
   - component: {fileID: 1347137463}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -834,7 +834,7 @@ PrefabInstance:
     - target: {fileID: 6444551779031003973, guid: fcc3a6e5811d4884794de1a89c879238,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 6444551779031003973, guid: fcc3a6e5811d4884794de1a89c879238,
         type: 3}
@@ -879,7 +879,7 @@ PrefabInstance:
     - target: {fileID: 6444551779031003973, guid: fcc3a6e5811d4884794de1a89c879238,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 6444551779031003973, guid: fcc3a6e5811d4884794de1a89c879238,
         type: 3}
@@ -1030,6 +1030,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3416794124995421540, guid: fcc3a6e5811d4884794de1a89c879238,
+        type: 3}
+      propertyPath: m_MinWidth
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6320712830480493915, guid: fcc3a6e5811d4884794de1a89c879238,
         type: 3}
       propertyPath: m_Name
@@ -1078,7 +1083,7 @@ PrefabInstance:
     - target: {fileID: 6444551779031003973, guid: fcc3a6e5811d4884794de1a89c879238,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 6444551779031003973, guid: fcc3a6e5811d4884794de1a89c879238,
         type: 3}
@@ -1123,7 +1128,7 @@ PrefabInstance:
     - target: {fileID: 6444551779031003973, guid: fcc3a6e5811d4884794de1a89c879238,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 6444551779031003973, guid: fcc3a6e5811d4884794de1a89c879238,
         type: 3}

@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 public class ImageRepository : Singleton<ImageRepository> 
 {
 
-    private string _urlMemoryImages = "https://localhost:7023/api/Image";
+    private string _urlMemoryImages = "http://localhost/MemoryGameAPI/api/Image";
 
     public void ProccesImageIds(Action<List<int>> processIds)
     {
