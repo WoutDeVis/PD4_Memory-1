@@ -6,93 +6,97 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ImageRepository : Singleton<ImageRepository> 
+namespace Memory.Data
 {
-
-    private string _urlMemoryImages = "http://localhost/MemoryGameAPI/api/Image";
-
-    public void ProccesImageIds(Action<List<int>> processIds)
+    public class ImageRepository : Singleton<ImageRepository>
     {
-        StartCoroutine(GetImageIds(processIds));
+
+        private string _urlMemoryImages = "http://localhost/MemoryGameAPI/api/Image";
+
+        public void ProccesImageIds(Action<List<int>> processIds)
+        {
+            StartCoroutine(GetImageIds(processIds));
+        }
+
+        private IEnumerator GetImageIds(Action<List<int>> processIds)
+        {
+            UnityWebRequest uwrids = UnityWebRequest.Get(_urlMemoryImages + "/ids");
+            yield return uwrids.SendWebRequest();
+            if (uwrids.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log("ImageRepository.GetImageIDs: " + uwrids.error);
+            }
+            else
+            {
+
+                string json = uwrids.downloadHandler.text;
+                List<int> imagedbids = JsonConvert.DeserializeObject<List<int>>(json);
+                //images = images.Where(i => !i.IsBack).ToList();
+
+
+
+                //List<int> imagedbids = images.Select(i => i.ID).ToList();
+                processIds(imagedbids);
+            }
+        }
+
+
+
+        public void GetProcessTexture(int imgdbid, Action<Texture2D> processTexture)
+        {
+            StartCoroutine(GetTexture(imgdbid, processTexture));
+        }
+
+        private IEnumerator GetTexture(int imgdbid, Action<Texture2D> processTexture)
+        {
+            UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(_urlMemoryImages + "/" + imgdbid);
+            yield return uwr.SendWebRequest();
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log("ImageRepository.GetProcessMaterials: " + uwr.error);
+            }
+            else
+            {
+                Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
+                processTexture(texture);
+            }
+        }
+
+
+        public void AddCombination(int imageId)
+        {
+            StartCoroutine(PostCombination(imageId));
+        }
+
+        private IEnumerator PostCombination(int imageId)
+        {
+            string url = _urlMemoryImages + "/combinations?imageId=" + imageId;
+
+            UnityWebRequest uwr = UnityWebRequest.Post(url, "");
+            yield return uwr.SendWebRequest();
+
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log("ImageRepository.AddCombination: " + uwr.error);
+
+            }
+            else
+            {
+                string response = uwr.downloadHandler.text;
+                int combinationId = int.Parse(response);
+
+            }
+        }
     }
 
-    private IEnumerator GetImageIds(Action<List<int>> processIds)
+
+    public partial class DBImage
     {
-        UnityWebRequest uwrids = UnityWebRequest.Get(_urlMemoryImages+"/ids");
-        yield return uwrids.SendWebRequest();
-        if(uwrids.result != UnityWebRequest.Result.Success)
-        {
-            Debug.Log("ImageRepository.GetImageIDs: " + uwrids.error);
-        }
-        else
-        {
-            
-            string json = uwrids.downloadHandler.text;
-            List<int> imagedbids = JsonConvert.DeserializeObject<List<int>>(json);
-            //images = images.Where(i => !i.IsBack).ToList();
+        public int ID { get; set; }
 
+        public string Name { get; set; } = null!;
 
-
-            //List<int> imagedbids = images.Select(i => i.ID).ToList();
-            processIds(imagedbids);
-        }
+        public byte[] Image1 { get; set; } = null!;
     }
 
-
-
-    public void GetProcessTexture(int imgdbid, Action<Texture2D> processTexture)
-    {
-        StartCoroutine(GetTexture(imgdbid, processTexture));
-    }
-
-    private IEnumerator GetTexture(int imgdbid, Action<Texture2D> processTexture)
-    {
-        UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(_urlMemoryImages + "/" + imgdbid);
-        yield return uwr.SendWebRequest();
-        if(uwr.result != UnityWebRequest.Result.Success)
-        {
-            Debug.Log("ImageRepository.GetProcessMaterials: " + uwr.error);
-        }
-        else
-        {
-            Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
-            processTexture(texture);
-        }
-    }
-
-
-    public void AddCombination(int imageId)
-    {
-        StartCoroutine(PostCombination(imageId));
-    }
-
-    private IEnumerator PostCombination(int imageId)
-    {
-        string url = _urlMemoryImages + "/combinations?imageId=" + imageId;
-
-        UnityWebRequest uwr = UnityWebRequest.Post(url, "");
-        yield return uwr.SendWebRequest();
-
-        if (uwr.result != UnityWebRequest.Result.Success)
-        {
-            Debug.Log("ImageRepository.AddCombination: " + uwr.error);
-      
-        }
-        else
-        {
-            string response = uwr.downloadHandler.text;
-            int combinationId = int.Parse(response);
-          
-        }
-    }
-}
-
-
-public partial class DBImage
-{
-    public int ID { get; set; }
-
-    public string Name { get; set; } = null!;
-
-    public byte[] Image1 { get; set; } = null!;
 }
