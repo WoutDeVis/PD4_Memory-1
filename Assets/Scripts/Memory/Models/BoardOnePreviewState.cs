@@ -31,10 +31,12 @@ namespace Memory.Models
                 else
                     Board.Player2.Score++;
 
-
+                ImageRepository.Instance.AddCombination(tile.MemoryCardId);
                 tile.Board.State = new BoardTwoFoundState(tile.Board);
                 tile.State = new TileFoundState(tile);
                 tile.Board.PreviewingTiles[0].State = new TileFoundState(tile.Board.PreviewingTiles[0]);
+               
+
             }
             else
             {

@@ -33,7 +33,7 @@ namespace Memory
 
         // Start is called before the first frame update
         void Start()
-        {
+        {   
             Player player1 = new Player();
             Player player2 = new Player();
            

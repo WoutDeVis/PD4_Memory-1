@@ -59,11 +59,33 @@ public class ImageRepository : Singleton<ImageRepository>
             processTexture(texture);
         }
     }
+
+
+    public void AddCombination(int imageId)
+    {
+        StartCoroutine(PostCombination(imageId));
+    }
+
+    private IEnumerator PostCombination(int imageId)
+    {
+        string url = _urlMemoryImages + "/combinations?imageId=" + imageId;
+
+        UnityWebRequest uwr = UnityWebRequest.Post(url, "");
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log("ImageRepository.AddCombination: " + uwr.error);
+      
+        }
+        else
+        {
+            string response = uwr.downloadHandler.text;
+            int combinationId = int.Parse(response);
+          
+        }
+    }
 }
-
-
-
-
 
 
 public partial class DBImage
