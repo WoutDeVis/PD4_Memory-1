@@ -2,7 +2,6 @@ using Memory.Models.States;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace Memory.Models
 {
     public abstract class BoardStateBaseClass : IBoardState
@@ -13,6 +12,7 @@ namespace Memory.Models
         protected BoardStateBaseClass(MemoryBoard board)
         {
             Board = board;
+
         }
 
         public abstract void AddPreview(Tile tile);

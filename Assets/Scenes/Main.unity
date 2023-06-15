@@ -130,6 +130,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4751485764702197966, guid: 4eb9764900f8e844b96d8b71245b1ee3,
+        type: 3}
+      propertyPath: _tileSpacing
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7773037379055649082, guid: 4eb9764900f8e844b96d8b71245b1ee3,
         type: 3}
       propertyPath: m_RootOrder
@@ -687,7 +692,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
