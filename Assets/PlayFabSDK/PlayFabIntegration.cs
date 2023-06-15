@@ -13,7 +13,10 @@ namespace PlayFab
         public string Username { get; set; }
         public string DisplayName { get; set; }
 
-        private LoginResult _loginResult;
+        private LoginResult _loginPlayerOne;
+        private LoginResult _loginPlayerTwo;
+
+        private bool _isPlayerOne; 
 
         private void Awake()
         {
@@ -57,8 +60,10 @@ namespace PlayFab
         #region login
 
 
-        public void Login()
+        public void Login(bool isPlayerOne)
         {
+            _isPlayerOne = isPlayerOne; 
+
             var request = new LoginWithEmailAddressRequest
             {
                 Email = Email.Trim(),
@@ -69,8 +74,11 @@ namespace PlayFab
 
         private void OnLoginSuccess(LoginResult Result)
         {
-            _loginResult = Result;
-            Debug.Log("Login succesfull");
+            if(_isPlayerOne)
+                _loginPlayerOne = Result;
+            else 
+                _loginPlayerTwo = Result;
+            Debug.Log("Login succesfull: " + "IsPlayerOne: " + _isPlayerOne );
             GetUserInventory();
         }
         #endregion
@@ -79,7 +87,7 @@ namespace PlayFab
 
         private void GetUserInventory()
         {
-            GetUserInventoryRequest request = new GetUserInventoryRequest { AuthenticationContext = _loginResult.AuthenticationContext };
+            GetUserInventoryRequest request = new GetUserInventoryRequest { AuthenticationContext = _loginPlayerOne.AuthenticationContext };
             PlayFabClientAPI.GetUserInventory(request, OnGetUSerInventorySuccess, OnAPICallFailure);
         }
 
@@ -97,11 +105,19 @@ namespace PlayFab
         #endregion
 
         #region IncreaseFunds
-        public void IncreasePlayerFunds()
+        public void IncreasePlayerFunds(bool isPlayerOne)
         {
+            _isPlayerOne = isPlayerOne;
+            LoginResult result = _loginPlayerTwo;
+
+            if (isPlayerOne)  
+                result = _loginPlayerOne; 
+
+
             AddUserVirtualCurrencyRequest request = new AddUserVirtualCurrencyRequest
             {
-                AuthenticationContext = _loginResult.AuthenticationContext,
+
+                AuthenticationContext = result.AuthenticationContext,
                 Amount = 100,
                 VirtualCurrency = "GO",
             };
@@ -110,17 +126,24 @@ namespace PlayFab
 
         private void OnAddUserCurrencySuccess(ModifyUserVirtualCurrencyResult result)
         {
-            Debug.Log("Add virtual currency succeeded: " + result.Balance);
+            Debug.Log("Add virtual currency succeeded: " + result.Balance + "IsPlayerOne: " + _isPlayerOne);
         }
         #endregion
 
         #region PurchaseExcalibur
 
-        public void PurchaseExcalibur()
+        public void PurchaseExcalibur(bool isPlayerOne)
         {
+            _isPlayerOne = isPlayerOne;
+            LoginResult result = _loginPlayerTwo;
+
+            if (isPlayerOne)
+                result = _loginPlayerOne;
+
+
             PurchaseItemRequest request = new PurchaseItemRequest
             {
-                AuthenticationContext = _loginResult.AuthenticationContext,
+                AuthenticationContext = result.AuthenticationContext,
                 CatalogVersion = "MemoryGame",
                 ItemId = "1",
                 Price = 100,
@@ -131,7 +154,7 @@ namespace PlayFab
 
         private void OnBuySuccess(PurchaseItemResult obj)
         {
-            Debug.Log("Purchase succeeded!");
+            Debug.Log("Purchase succeeded! " + "IsPlayerOne: " + _isPlayerOne);
             GetUserInventory();
         }
         #endregion
