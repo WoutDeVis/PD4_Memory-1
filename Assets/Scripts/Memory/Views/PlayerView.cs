@@ -20,6 +20,7 @@ namespace Memory.Views
             if (e.PropertyName == "Name")
             {
                 playerNameText.text = Model.Name;
+             
             }
             if (e.PropertyName == "Score")
             {

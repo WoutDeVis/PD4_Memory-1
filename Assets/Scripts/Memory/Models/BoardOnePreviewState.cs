@@ -1,6 +1,7 @@
 using Memory.Data;
 using Memory.Models;
 using Memory.Models.States;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,13 +29,21 @@ namespace Memory.Models
             {
 
                 if (Board.Player1.IsActive)
-                    Board.Player1.Score++;
+                {
+                    ++Board.Player1.Score;
+                    ImageRepository.Instance.AddScore(Board.Player1.Name, Board.Player1.Score, (int)Board.Player1.Elapsed);
+                }
                 else
-                    Board.Player2.Score++;
+                {
+                    ++Board.Player2.Score;
+                    ImageRepository.Instance.AddScore(Board.Player2.Name, Board.Player2.Score, (int)Board.Player2.Elapsed);
+                }
                 ImageRepository.Instance.AddCombination(tile.MemoryCardId);
                 tile.Board.State = new BoardTwoFoundState(tile.Board);
                 tile.State = new TileFoundState(tile);
                 tile.Board.PreviewingTiles[0].State = new TileFoundState(tile.Board.PreviewingTiles[0]);
+
+              
                 
                
                 

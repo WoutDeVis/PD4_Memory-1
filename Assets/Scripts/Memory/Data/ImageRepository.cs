@@ -87,6 +87,42 @@ namespace Memory.Data
 
             }
         }
+
+        public void AddScore(string player, int score, int time)
+        {
+            StartCoroutine(PostScore(player, score, time));
+        }
+        public IEnumerator PostScore(string player, int score, int time)
+        {
+            string url = _urlMemoryImages + "/score";
+
+            DBScore score1 = new DBScore()
+            {
+                Player = player,
+                Score1 = score,
+                Time = time
+            };
+
+
+            string json = JsonConvert.SerializeObject(score1);
+            UnityWebRequest uwr = UnityWebRequest.Put(url, json);
+            uwr.SetRequestHeader("content-type", "application/json");
+            uwr.method = "POST";
+            yield return uwr.SendWebRequest();
+
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(uwr.error);
+            }
+            else
+            {
+                string response = uwr.downloadHandler.text;
+                int scoreId = int.Parse(response);
+                Debug.Log("Score added with ID: " + scoreId);
+
+            }
+        }
+
     }
 
 
@@ -98,5 +134,16 @@ namespace Memory.Data
 
         public byte[] Image1 { get; set; } = null!;
     }
+    public partial class DBScore
+    {
+        public int Id { get; set; }
+
+        public string Player { get; set; } = null!;
+
+        public int Score1 { get; set; }
+
+        public int Time { get; set; }
+    }
+
 
 }
