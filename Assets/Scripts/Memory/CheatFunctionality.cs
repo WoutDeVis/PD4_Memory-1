@@ -17,6 +17,7 @@ namespace Memory
         {
            _memoryBoardView = FindObjectOfType<MemoryBoardView>();
         }
+
         public void CheatButtonPressed()
         {
             var model = _memoryBoardView.Model;
@@ -27,19 +28,8 @@ namespace Memory
                 {
                    if( model.PreviewingTiles[0].MemoryCardId == model.Tiles[i].MemoryCardId)
                     {
-                        model.Tiles[i].Board.State = new BoardTwoPreviewState(model.Tiles[i].Board);
-                        model.Tiles[i].State = new TilePreviewState(model.Tiles[i]);
-
-                        if (model.Player1.IsActive)
-                            model.Player1.Score++;
-                        else
-                            model.Player2.Score++;
-
-                        ImageRepository.Instance.AddCombination(model.Tiles[i].MemoryCardId);
-                        model.Tiles[i].Board.State = new BoardTwoFoundState(model.Tiles[i].Board);
-                        model.Tiles[i].State = new TileFoundState(model.Tiles[i]);
-                        model.Tiles[i].Board.PreviewingTiles[0].State = new TileFoundState(model.Tiles[i].Board.PreviewingTiles[0]);
-
+                        model.Tiles[i].Board.State.AddPreview(model.Tiles[i]);
+                        break; 
                     }
                 }
             }
