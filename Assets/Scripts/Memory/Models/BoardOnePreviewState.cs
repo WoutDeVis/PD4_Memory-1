@@ -1,6 +1,7 @@
 using Memory.Data;
 using Memory.Models;
 using Memory.Models.States;
+using Memory.Views;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,6 +44,10 @@ namespace Memory.Models
             {
                 tile.Board.State = new BoardTwoPreviewState(tile.Board);
                 tile.State = new TilePreviewState(tile);
+
+                
+                
+                // when in this state - check if button is pressed. If so, show other tile. 
             }
         }
 

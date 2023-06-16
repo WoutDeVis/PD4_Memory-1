@@ -66,7 +66,6 @@ namespace Memory.Views
           
           
             Model.Board.State.AddPreview(Model);
-
         }
 
         protected override void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
